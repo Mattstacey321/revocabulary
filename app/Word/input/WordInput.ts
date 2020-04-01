@@ -5,10 +5,12 @@ import { Words } from "../schema/Words";
 export class WordInput implements Partial<Words>{
     @Field()
     word: String;
-    @Field()
-    meaning: String;
-    @Field()
-    example: String;
+    @Field(()=>[String])
+    meaning: [String];
+    @Field(() => [String])
+    example: [String];
     @Field()
     word_type:String
+    @Field(() => [String])
+    synonym: [String];
 }

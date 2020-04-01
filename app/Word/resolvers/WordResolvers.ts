@@ -3,6 +3,9 @@ import { Words } from "../schema/Words";
 import { WordsModel } from "../schema/Words";
 import { WordInput } from "../input/WordInput";
 import { fetch } from "cross-fetch";
+import getAmericanVoice from "../services/getAmericaVoice";
+import getPhonetic from "../services/getPhonetic";
+import getExampleImage from "../services/getExampleImage";
 
 @Resolver()
 export class WordResolver {
@@ -10,28 +13,34 @@ export class WordResolver {
     async returnAllWord() {
         return await WordsModel.find();
     }
-    @Mutation(() => Words)
-    async createNewWord(@Arg("data") { word, meaning, example, word_type }: WordInput) {
-        var getPhonetic = `https://api.dictionaryapi.dev/api/v1/entries/en/${word}`;
-       
-        fetch(getPhonetic).then(async (v) => {
-            var text = await v.text();
-            var jsonParse = JSON.parse(text);
-            var phonetic = jsonParse[0].phonetic
+    @Query(() => String)
+    async getVoice(@Arg("word") word: string) {
+        return getAmericanVoice(word);
 
-            return WordsModel.create({
-                word,
-                meaning,
-                example, word_type,
-                phonetic
-            }).then((v) => {
-                return v;
-            }).catch((err) => {
-                console.log(err);
-            });
-        }).catch((_) => {
-            return "";
-        })
+    }
+    @Mutation(() => Words)
+    async createNewWord(
+        @Arg("data") { word, meaning, example, word_type ,synonym}: WordInput,
+        @Arg("numberOfImage") number: number) {
+
+        var phonetic = await getPhonetic(word);
+        var audio = getAmericanVoice(word);
+        var image_example = await getExampleImage(word, number);
+        return WordsModel.create({
+            word,
+            synonym,
+            meaning,
+            example,
+            word_type,
+            phonetic,
+            audio,
+            image_example
+        }).then((v) => {
+            return v;
+        }).catch((err) => {
+            console.log(err);
+        });
+
 
     }
 } 

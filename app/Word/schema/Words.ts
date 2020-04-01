@@ -6,17 +6,33 @@ export class Words {
     @Field()
     @prop({ nullable: true })
     word: String;
-    @Field()
+
+    @Field(() => [String])
     @prop({ nullable: true })
-    meaning: String;
-    @Field()
+    meaning: String[];
+
+    @Field(() => [String])
     @prop({ nullable: true })
-    example: String;
+    example: String[];
+
     @Field()
     @prop({ nullable: true })
     phonetic: String;
-    @Field(()=>String)
+
+    @Field(() => String)
     @prop({ nullable: true })
     word_type: String;
+
+    @Field(() => String)
+    @prop({ nullable: true })
+    audio: String;
+    
+    @Field(() => String)
+    @prop({ nullable: true })
+    image_example: String;
+
+    @Field(() => [String])
+    @prop({ nullable: true })
+    synonym: String[];
 }
 export const WordsModel = getModelForClass(Words);
