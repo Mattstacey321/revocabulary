@@ -6,6 +6,9 @@ import { fetch } from "cross-fetch";
 import getAmericanVoice from "../services/getAmericaVoice";
 import getPhonetic from "../services/getPhonetic";
 import getExampleImage from "../services/getExampleImage";
+import { PartOfSpeechInput } from '../input/partOfSpeechInput';
+import { type } from "os";
+import checkWordExist from "../services/checkWordExist";
 
 @Resolver()
 export class WordResolver {
@@ -18,28 +21,39 @@ export class WordResolver {
         return getAmericanVoice(word);
 
     }
-    @Mutation(() => Words)
+    @Mutation(() => String)
     async createNewWord(
-        @Arg("data") { word, meaning, example, word_type ,synonym}: WordInput,
-        @Arg("numberOfImage") number: number) {
+        @Arg("data") { word, meaning, example, word_type, synonym }: WordInput,
+        @Arg("numberOfImage") number: number,
+        @Arg("partOfSpeech", type => [PartOfSpeechInput]) partOfSpeech: PartOfSpeechInput[]) {
 
-        var phonetic = await getPhonetic(word);
-        var audio = getAmericanVoice(word);
-        var image_example = await getExampleImage(word, number);
-        return WordsModel.create({
-            word,
-            synonym,
-            meaning,
-            example,
-            word_type,
-            phonetic,
-            audio,
-            image_example
-        }).then((v) => {
-            return v;
-        }).catch((err) => {
-            console.log(err);
-        });
+        
+        if(await checkWordExist(word) == true){
+            return "Word is exist. Try another word";
+        }
+        else{
+            var phonetic = await getPhonetic(word);
+            var audio = getAmericanVoice(word);
+            var image_example = await getExampleImage(word, number);
+            return WordsModel.create({
+                word,
+                synonym,
+                meaning,
+                example,
+                word_type,
+                phonetic,
+                audio,
+                image_example,
+                partOfSpeech
+            }).then((_) => {
+                return "OK";
+            }).catch((err) => {
+                console.log(err);
+                return "Fail"
+                
+            });
+        }
+        
 
 
     }

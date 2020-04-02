@@ -1,5 +1,7 @@
 import { InputType, Field } from "type-graphql";
 import { Words } from "../schema/Words";
+import { WordType } from "../schema/WordType";
+import { PartOfSpeechInput } from "./partOfSpeechInput";
 
 @InputType()
 export class WordInput implements Partial<Words>{
@@ -13,4 +15,6 @@ export class WordInput implements Partial<Words>{
     word_type:String
     @Field(() => [String])
     synonym: [String];
+    @Field(() => [PartOfSpeechInput])
+    partOfSpeech: [PartOfSpeechInput];
 }

@@ -1,5 +1,6 @@
 import { ObjectType, Field } from "type-graphql";
 import { getModelForClass, prop } from "@typegoose/typegoose";
+import { WordType } from "./WordType";
 
 @ObjectType()
 export class Words {
@@ -26,7 +27,7 @@ export class Words {
     @Field(() => String)
     @prop({ nullable: true })
     audio: String;
-    
+
     @Field(() => String)
     @prop({ nullable: true })
     image_example: String;
@@ -34,5 +35,9 @@ export class Words {
     @Field(() => [String])
     @prop({ nullable: true })
     synonym: String[];
+
+    @Field(() => [WordType])
+    @prop({ nullable: true })
+    partOfSpeech: WordType[]
 }
 export const WordsModel = getModelForClass(Words);

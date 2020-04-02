@@ -10,6 +10,12 @@ export class Phrase {
     @Field(()=>[String])
     @prop({ nullable: true })
     synonym: String[];
+    @Field(() => [String])
+    @prop({ nullable: true })
+    meaning: String[];
+    @Field()
+    @prop({ nullable: true })
+    example: String;
     
     
 }
