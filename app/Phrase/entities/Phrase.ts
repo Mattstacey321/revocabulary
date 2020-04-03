@@ -7,6 +7,9 @@ export class Phrase {
     @Field()
     @prop({ nullable: true })
     phrase: String;
+    @Field()
+    @prop({ nullable: true })
+    word_type: String;
     @Field(()=>[String])
     @prop({ nullable: true })
     synonym: String[];

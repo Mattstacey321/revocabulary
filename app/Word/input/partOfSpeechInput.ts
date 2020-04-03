@@ -14,4 +14,7 @@ export class PartOfSpeechInput implements Partial<WordType>{
 
     @Field()
     meaning:String;
+
+    @Field()
+    example:String
 }

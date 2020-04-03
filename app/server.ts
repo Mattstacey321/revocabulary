@@ -6,12 +6,13 @@ import { buildSchema } from "type-graphql";
 import { connect } from "mongoose";
 import { WordResolver } from "./Word/resolvers/WordResolvers";
 import { UserResolver } from "./User/resolver/UserResolver";
+import { PhraseResolver } from "./Phrase/resolver/phraseResolver";
 dotenv.config();
 
 const main = async () => {
     const schema = await buildSchema({
 
-        resolvers: [WordResolver, UserResolver],
+        resolvers: [WordResolver, UserResolver,PhraseResolver],
         emitSchemaFile: true,
         nullableByDefault: true,
         validate: false,

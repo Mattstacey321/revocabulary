@@ -4,7 +4,13 @@ import { Phrase } from "../entities/Phrase";
 @InputType()
 export class PhraseInput implements Partial<Phrase>{
     @Field()
-    phrase:String;
+    word_type:String
     @Field()
-    synonym:String[]
+    phrase:String;
+    @Field(()=>[String])
+    synonym:String[];
+    @Field(() => [String])
+    meaning:String[];
+    @Field()
+    example:String
 }

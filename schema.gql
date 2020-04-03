@@ -17,6 +17,7 @@ type LoginResult {
 type Mutation {
   createNewWord(partOfSpeech: [PartOfSpeechInput], numberOfImage: Float, data: WordInput): String
   createUser(data: UserInput): Boolean
+  createPhrase(data: PhraseInput): Phrase
 }
 
 input PartOfSpeechInput {
@@ -24,12 +25,30 @@ input PartOfSpeechInput {
   type: String
   phonetic: String
   meaning: String
+  example: String
+}
+
+type Phrase {
+  phrase: String
+  word_type: String
+  synonym: [String]
+  meaning: [String]
+  example: String
+}
+
+input PhraseInput {
+  word_type: String
+  phrase: String
+  synonym: [String]
+  meaning: [String]
+  example: String
 }
 
 type Query {
   returnAllWord: [Words]
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
+  getAllPhrase: [Phrase]
 }
 
 type User {
@@ -67,4 +86,5 @@ type WordType {
   word: String
   type: String
   phonetic: String
+  example: String
 }

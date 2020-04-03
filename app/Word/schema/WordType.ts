@@ -12,4 +12,7 @@ export class WordType{
     @Field()
     @prop({ nullable: true })
     phonetic:String
+    @Field()
+    @prop({ nullable: true })
+    example: String
 }
