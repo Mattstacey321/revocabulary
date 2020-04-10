@@ -20,6 +20,12 @@ type Mutation {
   createPhrase(data: PhraseInput): Phrase
 }
 
+type PaginateWord {
+  docs: [Words]
+  next: String
+  previous: String
+}
+
 input PartOfSpeechInput {
   word: String
   type: String
@@ -46,6 +52,7 @@ input PhraseInput {
 
 type Query {
   returnAllWord: [Words]
+  getWord(previous: String, limit: Float, next: String): PaginateWord
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
@@ -71,6 +78,7 @@ input WordInput {
 }
 
 type Words {
+  _id: String
   word: String
   meaning: [String]
   example: [String]
@@ -80,6 +88,8 @@ type Words {
   image_example: String
   synonym: [String]
   partOfSpeech: [WordType]
+  next: String
+  previous: String
 }
 
 type WordType {

@@ -1,9 +1,17 @@
-import { ObjectType, Field } from "type-graphql";
-import { getModelForClass, prop } from "@typegoose/typegoose";
+import { ObjectType, Field} from "type-graphql";
+import { getModelForClass, prop, index,plugin, mongoose} from "@typegoose/typegoose";
 import { WordType } from "./WordType";
+import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
 
+
+@plugin(paginationPlugin)
+@index({ word: 1 })
 @ObjectType()
 export class Words {
+    @Field()
+    @prop()
+    _id: String;
+
     @Field()
     @prop({ nullable: true })
     word: String;
@@ -39,5 +47,13 @@ export class Words {
     @Field(() => [WordType])
     @prop({ nullable: true })
     partOfSpeech: WordType[]
+
+    @Field()
+    @prop({ nullable: true })
+    next: String
+    @Field()
+    @prop({ nullable: true })
+    previous: String
 }
-export const WordsModel = getModelForClass(Words);
+
+export const WordsModel = getModelForClass(Words) as PaginateModel<Words, typeof Words>;
