@@ -1,7 +1,9 @@
 import { ObjectType, Field} from "type-graphql";
-import { getModelForClass, prop, index,plugin, mongoose} from "@typegoose/typegoose";
+import { getModelForClass, prop, index,plugin, mongoose,} from "@typegoose/typegoose";
 import { WordType } from "./WordType";
 import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
+import { Schema } from "mongoose";
+
 
 
 @plugin(paginationPlugin)
@@ -9,7 +11,7 @@ import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
 @ObjectType()
 export class Words {
     @Field()
-    @prop({ nullable: true })
+    
     _id: String;
 
     @Field()

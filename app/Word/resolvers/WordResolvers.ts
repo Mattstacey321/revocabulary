@@ -30,7 +30,7 @@ export class WordResolver {
     }
     @Query(()=>Words)
     async getWord(@Arg("wordID") wordID:string){
-        var result  = await WordsModel.findOne({_id:wordID});
+        var result  = await WordsModel.findOne({"_id":wordID});
         console.log(result);
         
         return result;
