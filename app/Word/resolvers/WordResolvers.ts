@@ -17,12 +17,9 @@ import { PaginateWord } from "../schema/PaginateWord";
 
 @Resolver()
 export class WordResolver {
-    @Query(() => [Words])
-    async returnAllWord() {
-        return await WordsModel.find();
-    }
+
     @Query(() => PaginateWord)
-    async getWord(@Arg("next") next:string,@Arg("limit") limit: number,@Arg("previous") previous:string){
+    async fetchWords(@Arg("next") next:string,@Arg("limit") limit: number,@Arg("previous") previous:string){
         
         var nextResult: string = "";
         var previousResult : string = "";
@@ -31,6 +28,14 @@ export class WordResolver {
         return result
  
     }
+    @Query(()=>Words)
+    async getWord(@Arg("wordID") wordID:string){
+        var result  = await WordsModel.findOne({_id:wordID});
+        console.log(result);
+        
+        return result;
+    }
+
     @Query(() => String)
     async getVoice(@Arg("word") word: string) {
         return getAmericanVoice(word);

@@ -9,7 +9,7 @@ import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
 @ObjectType()
 export class Words {
     @Field()
-    @prop()
+    @prop({ nullable: true })
     _id: String;
 
     @Field()
@@ -48,12 +48,6 @@ export class Words {
     @prop({ nullable: true })
     partOfSpeech: WordType[]
 
-    @Field()
-    @prop({ nullable: true })
-    next: String
-    @Field()
-    @prop({ nullable: true })
-    previous: String
 }
 
 export const WordsModel = getModelForClass(Words) as PaginateModel<Words, typeof Words>;

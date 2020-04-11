@@ -51,8 +51,8 @@ input PhraseInput {
 }
 
 type Query {
-  returnAllWord: [Words]
-  getWord(previous: String, limit: Float, next: String): PaginateWord
+  fetchWords(previous: String, limit: Float, next: String): PaginateWord
+  getWord(wordID: String): Words
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
@@ -88,8 +88,6 @@ type Words {
   image_example: String
   synonym: [String]
   partOfSpeech: [WordType]
-  next: String
-  previous: String
 }
 
 type WordType {
