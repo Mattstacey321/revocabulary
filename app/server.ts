@@ -7,12 +7,13 @@ import { connect } from "mongoose";
 import { WordResolver } from "./Word/resolvers/WordResolvers";
 import { UserResolver } from "./User/resolver/UserResolver";
 import { PhraseResolver } from "./Phrase/resolver/phraseResolver";
+import { TenseResolvers } from "./Grammar/resolvers/TenseResolvers";
 dotenv.config();
 
 const main = async () => {
     const schema = await buildSchema({
 
-        resolvers: [WordResolver, UserResolver,PhraseResolver],
+        resolvers: [WordResolver, UserResolver,PhraseResolver,TenseResolvers],
         emitSchemaFile: true,
         nullableByDefault: true,
         validate: false,

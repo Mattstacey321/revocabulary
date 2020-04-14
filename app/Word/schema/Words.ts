@@ -1,5 +1,5 @@
-import { ObjectType, Field} from "type-graphql";
-import { getModelForClass, prop, index,plugin, mongoose,} from "@typegoose/typegoose";
+import { ObjectType, Field } from "type-graphql";
+import { getModelForClass, prop, index, plugin, mongoose, } from "@typegoose/typegoose";
 import { WordType } from "./WordType";
 import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
 import { Schema } from "mongoose";
@@ -11,7 +11,7 @@ import { Schema } from "mongoose";
 @ObjectType()
 export class Words {
     @Field()
-    
+
     _id: String;
 
     @Field()

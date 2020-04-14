@@ -11,8 +11,6 @@ export class PhraseResolver {
     async getAllPhrase() {
         return await phraseModel.find();
     }
-
-    
     @Mutation(() => Phrase)
     async createPhrase(@Arg("data") { phrase, synonym, example, meaning,word_type }: PhraseInput) {
         return phraseModel.create({

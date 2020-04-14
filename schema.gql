@@ -3,6 +3,18 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input ExampleInput {
+  title: String
+  content: [String]
+  example: [String]
+}
+
+type ExampleType {
+  title: String
+  content: [String]
+  example: [String]
+}
+
 input LoginInput {
   password: String
   username: String
@@ -18,6 +30,7 @@ type Mutation {
   createNewWord(partOfSpeech: [PartOfSpeechInput], numberOfImage: Float, data: WordInput): String
   createUser(data: UserInput): Boolean
   createPhrase(data: PhraseInput): Phrase
+  addTense(input: TenseInput): Tense
 }
 
 type PaginateWord {
@@ -56,6 +69,37 @@ type Query {
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
+  getTense: [Tense]
+}
+
+input StructureInput {
+  type: String
+  formula: String
+  note: [String]
+}
+
+type StructureType {
+  type: String
+  formula: String
+  note: [String]
+}
+
+type Tense {
+  type: String
+  definition: String
+  structure: [StructureType]
+  usage: [ExampleType]
+  hint: [ExampleType]
+  rule: [ExampleType]
+}
+
+input TenseInput {
+  definition: String
+  type: String
+  structure: [StructureInput]
+  hint: [ExampleInput]
+  usage: [ExampleInput]
+  rule: [ExampleInput]
 }
 
 type User {
