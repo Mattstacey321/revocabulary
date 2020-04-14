@@ -9,6 +9,10 @@ export class TenseResolvers{
     async getTense() {
         return TenseModel.find();
     }
+    @Query(()=>Tense)
+    async getTenseByName(@Arg("type") type: string){
+        return TenseModel.findOne({"type":type});
+    }
     @Mutation(() => Tense)
     async addTense(@Arg("input") tenseInput :TenseInput) {
         var createGrammar = TenseModel.create(tenseInput);

@@ -70,6 +70,7 @@ type Query {
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
   getTense: [Tense]
+  getTenseByName(type: String): Tense
 }
 
 input StructureInput {
