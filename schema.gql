@@ -69,6 +69,7 @@ type Query {
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
+  searchPhrase(term: String): [Phrase]
   getTense: [Tense]
   getTenseByName(type: String): Tense
 }

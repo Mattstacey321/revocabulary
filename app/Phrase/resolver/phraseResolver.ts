@@ -11,6 +11,11 @@ export class PhraseResolver {
     async getAllPhrase() {
         return await phraseModel.find();
     }
+    @Query(()=>[Phrase])
+    async searchPhrase(@Arg("term") term:string){
+        var phrase = new RegExp('^' + term , "i");
+        return await phraseModel.aggregate([{$match:{"phrase": phrase}}])
+    }
     @Mutation(() => Phrase)
     async createPhrase(@Arg("data") { phrase, synonym, example, meaning,word_type }: PhraseInput) {
         return phraseModel.create({
