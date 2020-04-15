@@ -2,8 +2,6 @@ import { ObjectType, Field } from "type-graphql";
 import { getModelForClass, prop, index, plugin, mongoose, } from "@typegoose/typegoose";
 import { WordType } from "./WordType";
 import paginationPlugin, { PaginateModel } from 'typegoose-cursor-pagination';
-import { Schema } from "mongoose";
-
 
 
 @plugin(paginationPlugin)

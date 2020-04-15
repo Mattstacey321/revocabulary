@@ -33,6 +33,12 @@ type Mutation {
   addTense(input: TenseInput): Tense
 }
 
+type PaginatePhrase {
+  docs: [Phrase]
+  next: String
+  previous: String
+}
+
 type PaginateWord {
   docs: [Words]
   next: String
@@ -69,6 +75,7 @@ type Query {
   getVoice(word: String): String
   login(data: LoginInput): LoginResult
   getAllPhrase: [Phrase]
+  fetchPhrase(previous: String, limit: Float, next: String): PaginatePhrase
   searchPhrase(term: String): [Phrase]
   getTense: [Tense]
   getTenseByName(type: String): Tense

@@ -1,20 +1,15 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { Request, Response, NextFunction } from "express";
-import { IPaginateOptions } from "typegoose-cursor-pagination";
 import { Words } from "../schema/Words";
 import { WordsModel } from "../schema/Words";
 import { WordInput } from "../input/WordInput";
-import { fetch } from "cross-fetch";
 import getAmericanVoice from "../services/getAmericaVoice";
 import getPhonetic from "../services/getPhonetic";
 import getExampleImage from "../services/getExampleImage";
 import { PartOfSpeechInput } from '../input/partOfSpeechInput';
-import { type } from "os";
 import checkWordExist from "../services/checkWordExist";
-import paginateWord from "../services/paginateWord";
-import { pre } from "@typegoose/typegoose";
 import { PaginateWord } from "../schema/PaginateWord";
-
+import paginateModel from "../../Service/paginateModel";
+import {IPaginateModel, PaginateModel} from 'typegoose-cursor-pagination';
 @Resolver()
 export class WordResolver {
 
@@ -24,7 +19,7 @@ export class WordResolver {
         var nextResult: string = "";
         var previousResult : string = "";
         console.log();
-        const result  = (await paginateWord(limit, next, previous))
+        const result = (await paginateModel(limit, next, previous, "word", WordsModel))
         return result
  
     }
