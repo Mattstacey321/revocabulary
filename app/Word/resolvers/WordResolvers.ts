@@ -15,10 +15,7 @@ export class WordResolver {
 
     @Query(() => PaginateWord)
     async fetchWords(@Arg("next") next:string,@Arg("limit") limit: number,@Arg("previous") previous:string){
-        
-        var nextResult: string = "";
-        var previousResult : string = "";
-        console.log();
+
         const result = (await paginateModel(limit, next, previous, "word", WordsModel))
         return result
  

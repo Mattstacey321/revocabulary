@@ -58,6 +58,12 @@ type PaginateWord {
   previous: String
 }
 
+type PagnateIndiom {
+  docs: [Indiom]
+  next: String
+  previous: String
+}
+
 input PartOfSpeechInput {
   word: String
   type: String
@@ -92,7 +98,7 @@ type Query {
   searchPhrase(term: String): [Phrase]
   getTense: [Tense]
   getTenseByName(type: String): Tense
-  fetchIndiom(previous: String, limit: Float, next: String): [Indiom]
+  fetchIndiom(previous: String, limit: Float, next: String): PagnateIndiom
 }
 
 input StructureInput {
