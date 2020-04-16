@@ -11,7 +11,7 @@ export class IndiomResolvers{
         var nextResult: string = "";
         var previousResult: string = "";
 
-        const result = (await paginateModel(limit, next, previous, "word", IndiomModel))
+        const result = (await paginateModel(limit, next, previous, "indiom", IndiomModel))
         return result;
     }
     @Mutation(()=>Indiom)
