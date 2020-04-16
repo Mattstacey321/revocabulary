@@ -15,6 +15,18 @@ type ExampleType {
   example: [String]
 }
 
+type Indiom {
+  indiom: String
+  meaning_in_vi: String
+  meaning_in_en: String
+}
+
+input IndiomInput {
+  indiom: String
+  meaning_in_en: String
+  meaning_in_vi: String
+}
+
 input LoginInput {
   password: String
   username: String
@@ -31,6 +43,7 @@ type Mutation {
   createUser(data: UserInput): Boolean
   createPhrase(data: PhraseInput): Phrase
   addTense(input: TenseInput): Tense
+  createIndiom(input: IndiomInput): Indiom
 }
 
 type PaginatePhrase {
@@ -79,6 +92,7 @@ type Query {
   searchPhrase(term: String): [Phrase]
   getTense: [Tense]
   getTenseByName(type: String): Tense
+  fetchIndiom(previous: String, limit: Float, next: String): [Indiom]
 }
 
 input StructureInput {
