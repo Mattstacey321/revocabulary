@@ -24,7 +24,7 @@
     "ext": "ts"
   },
   "dependencies": {
-    "apollo-server-express": "^2.11.0",
+    "apollo-server-express": "^2.14.2",
     "class-validator": "^0.11.1",
     "cross-fetch": "^3.0.4",
     "dotenv": "^8.2.0",
